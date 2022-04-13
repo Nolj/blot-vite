@@ -1,0 +1,34 @@
+{
+  "posts": [
+    {
+      "id": 6131,
+      "title": "Element-ui和Element-Plus的区别_Element2和Element3的区别",
+      "body": "<h1> 一、定义区别</h1>\n\nElement-UI对应Element2：基本不支持手机版\nElement-Plus对应Element3：组件布局考虑了手机版展示\n\n### 二、框架区别\n\nElement-ui适用于Vue2框架\n\nElement-plus适用于Vue3框架\n\n### 三、开发中使用的区别\n\n1. Icon图标库变化了\n\n新版本的图标库使用方式\n\n``` language\n  <template>\n  <div>\n    <el-icon :size=\"size\" :color=\"color\">\n      <edit></edit>\n    </el-icon>\n    <!-- Or use it independently without derive attributes from parent -->\n    <edit></edit>\n<el-icon><copy-document /></el-icon>\n  </div>\n</template>\n```\n2.组件的插槽slot使用变化了\n\n同时可支持多个插槽\n``` language\n  <el-autocomplete popper-class=\"my-autocomplete\" v-model=\"state\" :fetch-suggestions=\"querySearch\" placeholder=\"请输入内容\" @select=\"handleSelect\" >\n <template #suffix>\n <i class=\"el-icon-edit el-input__icon\" @click=\"handleIconClick\"> </i> \n </template>\n <template #default=\"{ item }\"> \n//默认插槽，该scope的参数为item,表示当前输入建议对象\n <div class=\"name\">{{ item.value }}</div>\n <span class=\"addr\">{{ item.address }}</span>\n </template>\n </el-autocomplete>\n```",
+      "tags": [
+        "element-ui",
+        "element-plus",
+        "vue.js"
+      ],
+      "picUrl": ""
+    },
+    {
+      "id": 2975,
+      "title": "介绍8个和滚动相关的CSS属性",
+      "body": "### 属性\n- Scroll Snap \n- scroll-behavior \n- overscroll-behavior \n- overflow-anchor \n- scrollbar-width \n- scrollbar-color \n- scrollbar-gutter \n- -webkit-overflow-scrolling \n- Scroll Snap \n\n###### Scroll Snap 是一个 CSS 独立模块，可以让滚动元素停止的时候有吸附效果，非常时候实现类似 Swiper 这种交互，甚至是那种可以滑来滑去的选项卡交互效果。\n###### scroll-behavior scroll-behavior 可以让滚动容器出现锚点定位，或者 JS 设置 scrollLeft/scrollTop 滚动距离时候表现为平滑定位。",
+      "tags": [
+        "css",
+        "ScrollSnap"
+      ],
+      "picUrl": ""
+    },
+    {
+      "id": 8551,
+      "title": "JavaScript 的 this 原理",
+      "body": "obj.foo和foo指向同一个函数，但是执行结果可能不一样。请看下面的例子。\n``` language\n  var obj = {\n  foo: function () { console.log(this.bar) },\n  bar: 1\n};\n\nvar foo = obj.foo;\nvar bar = 2;\n\nobj.foo() // 1\nfoo() // 2\n```\n这种差异的原因，就在于函数体内部使用了this关键字。\n对于obj.foo()来说，foo运行在obj环境，所以this指向obj；对于foo()来说，foo运行在全局环境，所以this指向全局环境。所以，两者的运行结果不一样。\n#### 二、内存的数据结构\nJavaScript 语言之所以有this的设计，跟内存里面的数据结构有关系。\n``` language\n  var obj = { foo:  5 };\n```\n上面的代码将一个对象赋值给变量obj。JavaScript 引擎会先在内存里面，生成一个对象{ foo: 5 }，然后把这个对象的内存地址赋值给变量obj。\n变量obj是一个地址（reference）。后面如果要读取obj.foo，引擎先从obj拿到内存地址，然后再从该地址读出原始的对象，返回它的foo属性。\n#### 三：函数\n``` language\n  var obj = { foo: function () {} };\n```\n这时，引擎会将函数单独保存在内存中，然后再将函数的地址赋值给foo属性的value属性。\n``` language\n  {\n  foo: {\n    [[value]]: 函数的地址\n    ...\n  }\n}\n```\n由于函数是一个单独的值，所以它可以在不同的环境（上下文）执行。\n``` language\n  var f = function () {};\nvar obj = { f: f };\n\n// 单独执行\nf()\n\n// obj 环境执行\nobj.f()\n```\n#### 四、环境变量\nJavaScript 允许在函数体内部，引用当前环境的其他变量。\n``` language\n  var f = function () {\n  console.log(x);\n};\n```\n函数体里面使用了变量x。该变量由运行环境提供。\n由于函数可以在不同的运行环境执行，所以需要有一种机制，能够在函数体内部获得当前的运行环境（context）。所以，this就出现了，它的设计目的就是在函数体内部，指代函数当前的运行环境。\n``` language\n  var f = function () {\n  console.log(this.x);\n}\n```\n函数体里面的this.x就是指当前运行环境的x\n``` language\n  var f = function () {\n  console.log(this.x);\n}\n\nvar x = 1;\nvar obj = {\n  f: f,\n  x: 2,\n};\n\n// 单独执行\nf() // 1\n\n// obj 环境执行\nobj.f() // 2\n```\n函数f在全局环境执行，this.x指向全局环境的x。\n在obj环境执行，this.x指向obj.x。\n\n**总结**：obj.foo()是通过obj找到foo，所以就是在obj环境执行。一旦var foo = obj.foo，变量foo就直接指向函数本身，所以foo()就变成在全局环境执行。",
+      "tags": [
+        "javaScript"
+      ],
+      "picUrl": ""
+    }
+  ]
+}
